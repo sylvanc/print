@@ -1,4 +1,4 @@
-use to_string = string | ()->string;
+use string_thunk = to_string | ()->string;
 
 // Thread-safe writer. Wraps any A in a cown so all writes are serialized.
 // Logging methods (error, warning, etc.) require A to have a log_level
@@ -59,32 +59,32 @@ async_writer[A]
   // Logging methods. The level check and write happen in a single `when`
   // block, so there's no race between checking the level and writing.
   // Lazy messages (()->string) are only evaluated if the level passes.
-  error(self: async_writer, msg: to_string): none
+  error(self: async_writer, msg: string_thunk): none
   {
     self.log(log::error, msg)
   }
 
-  warning(self: async_writer, msg: to_string): none
+  warning(self: async_writer, msg: string_thunk): none
   {
     self.log(log::warning, msg)
   }
 
-  info(self: async_writer, msg: to_string): none
+  info(self: async_writer, msg: string_thunk): none
   {
     self.log(log::info, msg)
   }
 
-  debug(self: async_writer, msg: to_string): none
+  debug(self: async_writer, msg: string_thunk): none
   {
     self.log(log::debug, msg)
   }
 
-  trace(self: async_writer, msg: to_string): none
+  trace(self: async_writer, msg: string_thunk): none
   {
     self.log(log::trace, msg)
   }
 
-  log(self: async_writer, log_level: log::level, msg: to_string): none
+  log(self: async_writer, log_level: log::level, msg: string_thunk): none
   {
     when self.c w ->
     {
@@ -94,7 +94,7 @@ async_writer[A]
 
         match msg
         {
-          (s: string) -> (*w).print(s);
+          (s: to_string) -> (*w).print(s.string);
           (s: ()->string) -> (*w).print(s());
         }
       }

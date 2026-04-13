@@ -13,9 +13,9 @@ shape writer
 shape logger
 {
   set_log_level(self: self, log_level: log::level): none;
-  error(self: self, msg: to_string): none;
-  warning(self: self, msg: to_string): none;
-  info(self: self, msg: to_string): none;
-  debug(self: self, msg: to_string): none;
-  trace(self: self, msg: to_string): none;
+  error(self: self, msg: string_thunk): none;
+  warning(self: self, msg: string_thunk): none;
+  info(self: self, msg: string_thunk): none;
+  debug(self: self, msg: string_thunk): none;
+  trace(self: self, msg: string_thunk): none;
 }

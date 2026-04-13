@@ -1,4 +1,4 @@
-main(): i32
+main(): none
 {
   let buf = buffer out;
   buf "Hello, world 1!";
@@ -8,5 +8,4 @@ main(): i32
   err.trace "This won't print.\n";
   err.set_log_level log::trace;
   err.trace "This will print.\n";
-  0
 }

@@ -70,7 +70,7 @@ buffer[A]
     {
       let b = self.data = array[u8]::fill self.cap;
       let n = self.len = 0;
-      freeze b;
+      mem::freeze b;
       self.w.write(b, n)
     }
   }
@@ -86,7 +86,7 @@ buffer[A]
     if self.len > 0
     {
       let b = self.data.copy(0, self.len);
-      freeze b;
+      mem::freeze b;
       self.w.write(b, self.len)
     }
   }
