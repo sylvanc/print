@@ -10,7 +10,7 @@ buffer[A]
 
   create(w: A, cap: usize = buffer::default_size): buffer
   {
-    new {w, data = array[u8]::fill cap, cap, len = 0}
+    new {w, data = array[u8]::alloc cap, cap, len = 0}
   }
 
   default_size(): usize
@@ -68,7 +68,7 @@ buffer[A]
   {
     if self.len > 0
     {
-      let b = self.data = array[u8]::fill self.cap;
+      let b = self.data = array[u8]::alloc self.cap;
       let n = self.len = 0;
       mem::freeze b;
       self.w.write(b, n)
