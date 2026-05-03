@@ -9,7 +9,7 @@ async_writer[A]
   terminal: bool;
 
   // Caches terminal status at creation time (before the cown takes ownership).
-  create(w: A)
+  create(w: A): async_writer[A]
   {
     let t = w.terminal;
     new {c = cown w, terminal = t}
